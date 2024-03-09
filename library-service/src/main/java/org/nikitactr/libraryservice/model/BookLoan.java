@@ -1,8 +1,6 @@
 package org.nikitactr.libraryservice.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -11,7 +9,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "book_loans")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
+@Builder
 @Setter
 public class BookLoan {
 
@@ -30,10 +30,4 @@ public class BookLoan {
     @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime returnTime;
-
-    public BookLoan(Book book, LocalDateTime loanTime, LocalDateTime returnTime) {
-        this.book = book;
-        this.loanTime = loanTime;
-        this.returnTime = returnTime;
-    }
 }

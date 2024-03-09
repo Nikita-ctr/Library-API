@@ -1,5 +1,7 @@
 package org.nikitactr.libraryservice.service;
 
+import lombok.extern.log4j.Log4j2;
+import org.nikitactr.libraryservice.exception.BookNotFoundException;
 import org.nikitactr.libraryservice.mapper.BookMapper;
 import org.nikitactr.libraryservice.model.Book;
 import org.nikitactr.libraryservice.model.BookLoan;
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Log4j2
 public class LibraryService {
     private final BookLoanRepository bookLoanRepository;
 
@@ -27,22 +30,33 @@ public class LibraryService {
     }
 
     public void addBookLoan(Long bookId) {
-        BookLoan bookLoan = new BookLoan();
-        bookLoan.setBook(bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found")));
-        bookLoan.setLoanTime(LocalDateTime.now());
-        bookLoan.setReturnTime(LocalDateTime.now().plusHours(4));
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> {
+                    String message = "Book with id: " + bookId + " not found";
+                    log.error(message);
+                    return new BookNotFoundException("Book with id: " + bookId + " not found");
+                });
+
+        BookLoan bookLoan = BookLoan.builder()
+                .book(book)
+                .loanTime(LocalDateTime.now())
+                .returnTime(LocalDateTime.now().plusHours(4))
+                .build();
+
         bookLoanRepository.save(bookLoan);
+        log.info("Added book loan for book with id: {}", bookId);
     }
 
     public List<BookResponse> findAvailableBooks() {
-        List<Book> allBooks = bookRepository.findAll();
-        List<BookLoan> borrowedBooks = bookLoanRepository.findAll();
-        bookMapper.booksToBookResponses(allBooks);
-        List<Book> filteredBooks = allBooks.stream()
-                .filter(book -> borrowedBooks.stream()
-                        .noneMatch(loan -> loan.getBook().getId().equals(book.getId())))
+        List<Book> availableBooks = bookRepository.findAll().stream()
+                .filter(this::isBookAvailable)
                 .collect(Collectors.toList());
 
-        return bookMapper.booksToBookResponses(filteredBooks);
+        return bookMapper.booksToBookResponses(availableBooks);
+    }
+
+    private boolean isBookAvailable(Book book) {
+        return bookLoanRepository.findAll().stream()
+                .noneMatch(loan -> loan.getBook().getId().equals(book.getId()));
     }
 }

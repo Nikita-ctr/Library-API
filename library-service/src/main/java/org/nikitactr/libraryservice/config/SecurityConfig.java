@@ -23,12 +23,19 @@ public class SecurityConfig {
     private final JWTAccessDeniedHandler accessDeniedHandler;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    private static final String[] AUTH_WHITELIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+    };
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/library/loans/**").hasRole("USER")
+                .antMatchers(HttpMethod.GET, "/library/loans/**").hasRole("USER")
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .and()
                 .authorizeRequests().anyRequest().authenticated()
                 .and()
