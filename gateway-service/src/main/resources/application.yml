@@ -1,11 +1,7 @@
 server:
   port: 9090
 
-
 spring:
-  redis:
-    host: redis
-    port: 6379
   application:
     name: API-GATEWAY
   config:
@@ -13,45 +9,24 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: ORDER-SERVICE
-          uri: lb://ORDER-SERVICE
+        - id: BOOK-SERVICE
+          uri: lb://BOOK-SERVICE
           predicates:
-            - Path=/order/**
+            - Path=/books/**
           filters:
             - name: CircuitBreaker
               args:
-                name: ORDER-SERVICE
+                name: BOOK-SERVICE
                 fallbackuri: forward:/orderServiceFallBack
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 1 # how many requests per second a user is allowed to send without any dropped requests (1000 requests per minute)
-                redis-rate-limiter.burstCapacity: 1 # maximum number of requests a user is allowed to do in a single second (500 requests per second)
-        - id: PAYMENT-SERVICE
-          uri: lb://PAYMENT-SERVICE
+        - id: LIBRARY-SERVICE
+          uri: lb://LIBRARY-SERVICE
           predicates:
-            - Path=/payment/**
+            - Path=/library/loans/**
           filters:
             - name: CircuitBreaker
               args:
-                name: PAYMENT-SERVICE
+                name: LIBRARY-SERVICE
                 fallbackuri: forward:/paymentServiceFallBack
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 1
-        - id: PRODUCT-SERVICE
-          uri: lb://PRODUCT-SERVICE
-          predicates:
-            - Path=/product/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: PRODUCT-SERVICE
-                fallbackuri: forward:/productServiceFallBack
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 1
         - id: AUTH-SERVICE
           uri: lb://AUTH-SERVICE
           predicates:
@@ -61,10 +36,6 @@ spring:
               args:
                 name: AUTH-SERVICE
                 fallbackuri: forward:/productServiceFallBack
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 1
-                redis-rate-limiter.burstCapacity: 1
 
 logging:
   level:
@@ -72,5 +43,3 @@ logging:
 
 jwt:
   secret: mySecretKey
-  expireMs: 120000
-  refrEshexpireMs: 120000

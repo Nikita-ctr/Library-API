@@ -1,6 +1,7 @@
 package org.nikitactr.authservice.jwt;
 
 import io.jsonwebtoken.*;
+import lombok.extern.log4j.Log4j2;
 import org.nikitactr.authservice.security.CustomUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,9 +12,8 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
+@Log4j2
 public class JwtUtils {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(JwtUtils.class);
 
     @Value("${jwt.secret}")
     private String jwtSecret;
@@ -34,9 +34,7 @@ public class JwtUtils {
     public String generateTokenFromUsername(String username) {
         UserDetails userDetails= customUserDetailsService.loadUserByUsername(username);
         StringBuilder roles=new StringBuilder();
-        userDetails.getAuthorities().forEach(role->{
-            roles.append(role.getAuthority()+" ");
-        });
+        userDetails.getAuthorities().forEach(role-> roles.append(role.getAuthority()).append(" "));
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuer(roles.toString())
@@ -55,17 +53,16 @@ public class JwtUtils {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException e) {
-            LOGGER.error("JwtUtils | validateJwtToken | Invalid JWT signature: {}", e.getMessage());
+            log.error("JwtUtils | validateJwtToken | Invalid JWT signature: {}", e.getMessage());
         } catch (MalformedJwtException e) {
-            LOGGER.error("JwtUtils | validateJwtToken | Invalid JWT token: {}", e.getMessage());
+            log.error("JwtUtils | validateJwtToken | Invalid JWT token: {}", e.getMessage());
         } catch (ExpiredJwtException e) {
-            LOGGER.error("JwtUtils | validateJwtToken | JWT token is expired: {}", e.getMessage());
+            log.error("JwtUtils | validateJwtToken | JWT token is expired: {}", e.getMessage());
         } catch (UnsupportedJwtException e) {
-            LOGGER.error("JwtUtils | validateJwtToken | JWT token is unsupported: {}", e.getMessage());
+            log.error("JwtUtils | validateJwtToken | JWT token is unsupported: {}", e.getMessage());
         } catch (IllegalArgumentException e) {
-            LOGGER.error("JwtUtils | validateJwtToken | JWT claims string is empty: {}", e.getMessage());
+            log.error("JwtUtils | validateJwtToken | JWT claims string is empty: {}", e.getMessage());
         }
-
         return false;
     }
 }

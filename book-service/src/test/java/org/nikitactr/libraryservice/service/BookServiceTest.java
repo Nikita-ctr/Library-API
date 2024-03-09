@@ -1,19 +1,19 @@
 package org.nikitactr.libraryservice.service;
 
-import exception.BookNotFoundException;
-import mapper.BookMapper;
-import model.Book;
-import payload.request.BookRequest;
-import payload.response.BookResponse;
-import repository.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.nikitactr.bookservice.exception.BookNotFoundException;
+import org.nikitactr.bookservice.mapper.BookMapper;
+import org.nikitactr.bookservice.model.Book;
+import org.nikitactr.bookservice.payload.request.BookRequest;
+import org.nikitactr.bookservice.payload.response.BookResponse;
+import org.nikitactr.bookservice.repository.BookRepository;
+import org.nikitactr.bookservice.service.BookService;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.RestTemplate;
-import service.BookService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -87,7 +87,7 @@ public class BookServiceTest {
         String isbn = "1234";
         Book book = new Book(1L, isbn, "Book 1", "Genre 1", "Description 1", "Author 1");
 
-        when(bookRepository.findByIsbn(isbn)).thenReturn(book);
+        when(bookRepository.findByIsbn(isbn)).thenReturn(Optional.of(book));
 
         BookResponse bookResponse = bookService.findBookByISBN(isbn);
 
@@ -103,7 +103,7 @@ public class BookServiceTest {
         Book book = bookMapper.bookRequestToBook(bookRequest);
 
         when(bookRepository.save(any(Book.class))).thenReturn(book);
-        assertDoesNotThrow(() -> bookService.addBook(bookRequest));
+        assertDoesNotThrow(() -> bookService.addBook(bookRequest,"test"));
     }
 
     @Test

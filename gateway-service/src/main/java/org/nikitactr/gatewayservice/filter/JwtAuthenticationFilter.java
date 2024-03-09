@@ -1,5 +1,6 @@
 package org.nikitactr.gatewayservice.filter;
 
+import lombok.extern.log4j.Log4j2;
 import org.nikitactr.gatewayservice.exception.JwtTokenMalformedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -23,7 +24,7 @@ import java.util.function.Predicate;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
+@Log4j2
 public class JwtAuthenticationFilter implements GatewayFilter {
 
     private final JwtUtils jwtUtils;
@@ -33,9 +34,9 @@ public class JwtAuthenticationFilter implements GatewayFilter {
 
         log.info("JwtAuthenticationFilter | filter is working");
 
-        ServerHttpRequest request = (ServerHttpRequest) exchange.getRequest();
+        ServerHttpRequest request = exchange.getRequest();
 
-        final List<String> apiEndpoints = List.of("/signup", "/login","/refreshtoken");
+        final List<String> apiEndpoints = List.of("/signup", "/login", "/refreshtoken");
 
         Predicate<ServerHttpRequest> isApiSecured = r -> apiEndpoints.stream()
                 .noneMatch(uri -> r.getURI().getPath().contains(uri));
@@ -75,7 +76,6 @@ public class JwtAuthenticationFilter implements GatewayFilter {
             Claims claims = jwtUtils.getClaims(token);
             exchange.getRequest().mutate().header("username", String.valueOf(claims.get("username"))).build();
         }
-
         return chain.filter(exchange);
     }
 }

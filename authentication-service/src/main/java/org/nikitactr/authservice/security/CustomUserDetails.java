@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class CustomUserDetails implements UserDetails {
 
-    private User user;
+    private final User user;
 
     public CustomUserDetails(User user) {
         this.user = user;
@@ -22,13 +22,13 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> roles = user.getRoles();
-        List<SimpleGrantedAuthority> authories = new ArrayList<>();
+        List<SimpleGrantedAuthority> authorizes = new ArrayList<>();
 
         for (Role role : roles) {
-            authories.add(new SimpleGrantedAuthority(role.getName().name()));
+            authorizes.add(new SimpleGrantedAuthority(role.getName().name()));
         }
 
-        return authories;
+        return authorizes;
     }
 
     @Override

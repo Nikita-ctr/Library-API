@@ -29,7 +29,6 @@ public class ApigatewayApplication {
                         ).build()
         );
     }
-
     @Bean
     KeyResolver userKeySolver() {
         return exchange -> Mono.just("userKey");

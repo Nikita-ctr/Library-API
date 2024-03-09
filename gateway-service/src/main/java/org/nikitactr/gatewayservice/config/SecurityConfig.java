@@ -19,6 +19,4 @@ public class SecurityConfig {
                         .permitAll());
         return serverHttpSecurity.build();
     }
-
-
 }

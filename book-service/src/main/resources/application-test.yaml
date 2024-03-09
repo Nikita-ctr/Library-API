@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:product
+    url: jdbc:h2:mem:test
     username: sa
     password: password
     driverClassName: org.h2.Driver
@@ -9,7 +9,7 @@ spring:
     hibernate:
       ddl-auto: update
   application:
-    name: PRODUCT-SERVICE
+    name: BOOK-SERVICE
   config:
     import: optional:configserver:http://localhost:9296
 

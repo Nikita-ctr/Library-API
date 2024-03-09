@@ -1,5 +1,7 @@
 package org.nikitactr.authservice.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,10 +10,12 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "Users")
 @Data
+@Entity
+@Builder
+@Table(name = "Users")
 @NoArgsConstructor
+@AllArgsConstructor
 public class User extends IdBasedEntity implements Serializable {
 
     @Column(unique = true, nullable = false)
@@ -22,7 +26,7 @@ public class User extends IdBasedEntity implements Serializable {
 
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

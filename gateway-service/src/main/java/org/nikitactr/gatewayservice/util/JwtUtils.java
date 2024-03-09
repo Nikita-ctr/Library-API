@@ -16,19 +16,17 @@ public class JwtUtils {
 
     public Claims getClaims(final String token) {
         try {
-            Claims body = Jwts.parser().setSigningKey(jwtSecret)
+            return Jwts.parser().setSigningKey(jwtSecret)
                     .parseClaimsJws(token).getBody();
-            return body;
         } catch (Exception e) {
             System.out.println(e.getMessage() + " => " + e);
         }
         return null;
     }
 
-    public boolean validateJwtToken(String authToken) {
+    public void validateJwtToken(String authToken) {
         try {
             Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
-            return true;
         } catch (SignatureException e) {
             LOGGER.error("JwtUtils | validateJwtToken | Invalid JWT signature: {}", e.getMessage());
             throw new SignatureException(e.getMessage());
@@ -37,7 +35,7 @@ public class JwtUtils {
             throw new MalformedJwtException(e.getMessage());
         } catch (ExpiredJwtException e) {
             LOGGER.error("JwtUtils | validateJwtToken | JWT token is expired: {}", e.getMessage());
-            throw new ExpiredJwtException(null,null,e.getMessage());
+            throw new ExpiredJwtException(null, null, e.getMessage());
         } catch (UnsupportedJwtException e) {
             LOGGER.error("JwtUtils | validateJwtToken | JWT token is unsupported: {}", e.getMessage());
             throw new UnsupportedJwtException(e.getMessage());
@@ -45,6 +43,5 @@ public class JwtUtils {
             LOGGER.error("JwtUtils | validateJwtToken | JWT claims string is empty: {}", e.getMessage());
             throw new IllegalArgumentException(e.getMessage());
         }
-
     }
 }
