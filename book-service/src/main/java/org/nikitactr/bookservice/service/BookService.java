@@ -9,6 +9,9 @@ import org.nikitactr.bookservice.payload.request.BookLoanRequest;
 import org.nikitactr.bookservice.payload.request.BookRequest;
 import org.nikitactr.bookservice.payload.response.BookResponse;
 import org.nikitactr.bookservice.repository.BookRepository;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -58,7 +61,7 @@ public class BookService {
         return bookMapper.bookToBookResponse(book);
     }
 
-    public void addBook(BookRequest bookRequest) {
+    public void addBook(BookRequest bookRequest, String bearerToken) {
         String isbn = bookRequest.getIsbn();
         if (bookRepository.existsByIsbn(isbn)) {
             String message = "Book with ISBN: " + isbn + " already exists";
@@ -67,11 +70,9 @@ public class BookService {
         }
         Book book = bookMapper.bookRequestToBook(bookRequest);
         bookRepository.save(book);
-
-        String libraryServiceUrl = "http://localhost:8082/library/loans";
-        BookLoanRequest libraryBookRequest = new BookLoanRequest(book.getId());
-        restTemplate.postForObject(libraryServiceUrl, libraryBookRequest, Void.class);
         log.info("Added book with id: {}", book.getId());
+
+        sendBookLoanRequest(book.getId(), bearerToken);
     }
 
     public void updateBook(Long id, BookRequest bookRequest) {
@@ -103,5 +104,16 @@ public class BookService {
         bookRepository.deleteBookAndLoans(book.getId());
         bookRepository.delete(book);
         log.info("Deleted book with id: {}", id);
+    }
+
+    private void sendBookLoanRequest(Long bookId, String bearerToken) {
+        String libraryServiceUrl = "http://localhost:8082/library/loans";
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", bearerToken);
+        BookLoanRequest libraryBookRequest = new BookLoanRequest(bookId);
+        HttpEntity<BookLoanRequest> requestEntity = new HttpEntity<>(libraryBookRequest, headers);
+        restTemplate.postForObject(libraryServiceUrl, requestEntity, Void.class);
+        log.info("Sent book loan request for book with id: {}", bookId);
     }
 }

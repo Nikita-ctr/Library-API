@@ -28,7 +28,7 @@ public class SecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/library/loans/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/library/loans/**").hasRole("USER")
                 .and()
                 .authorizeRequests().anyRequest().authenticated()
                 .and()

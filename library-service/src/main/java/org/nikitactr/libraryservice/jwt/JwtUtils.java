@@ -22,8 +22,7 @@ public class JwtUtils extends SecurityProperties.Filter {
         if(token.startsWith("Bearer")){
             token = token.substring(7);
         }
-        String username= Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
-        return username;
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
     public String[] getRoleNamesFromJwtToken(String token) {
         if(token.startsWith("Bearer")){
@@ -45,7 +44,6 @@ public class JwtUtils extends SecurityProperties.Filter {
         } catch (IllegalArgumentException e) {
             LOGGER.error("JwtUtils | validateJwtToken | JWT claims string is empty: {}", e.getMessage());
         }
-
         return false;
     }
 }

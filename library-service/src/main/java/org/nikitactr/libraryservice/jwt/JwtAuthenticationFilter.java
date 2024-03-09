@@ -1,5 +1,6 @@
 package org.nikitactr.libraryservice.jwt;
 
+import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,27 +20,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Slf4j
+@Log4j2
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+    private final JwtUtils jwtUtils;
 
-    @Autowired
-    private JwtUtils jwtUtils;
+    public JwtAuthenticationFilter(JwtUtils jwtUtils) {
+        this.jwtUtils = jwtUtils;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException, ServletException {
-
         try {
-
             String jwt = parseJwt(req);
             log.error("AuthTokenFilter | doFilterInternal | jwt: {}", jwt);
 
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
 
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
-                List<SimpleGrantedAuthority> authorities=new ArrayList<>();
+                List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-                for(String rolename : jwtUtils.getRoleNamesFromJwtToken(jwt)){
+                for (String rolename : jwtUtils.getRoleNamesFromJwtToken(jwt)) {
                     authorities.add(new SimpleGrantedAuthority(rolename));
                 }
 
@@ -57,19 +58,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String parseJwt(HttpServletRequest request) {
-
         String headerAuth = request.getHeader("Authorization");
-
         log.info("AuthTokenFilter | parseJwt | headerAuth: {}", headerAuth);
-
-        //   if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
         if (StringUtils.hasText(headerAuth)) {
-
             log.info("AuthTokenFilter | parseJwt | parseJwt: {}", headerAuth.substring(7, headerAuth.length()));
-
             return headerAuth.substring(7, headerAuth.length());
         }
-
         return null;
     }
 }

@@ -38,8 +38,8 @@ public class BookController {
 
     @Operation(summary = "Create a new book")
     @PostMapping
-    public void addBook(@RequestBody BookRequest bookRequest) {
-        bookService.addBook(bookRequest);
+    public void addBook(@RequestBody BookRequest bookRequest, @RequestHeader("Authorization") String bearerToken) {
+        bookService.addBook(bookRequest, bearerToken);
     }
 
     @Operation(summary = "Update an existing book")

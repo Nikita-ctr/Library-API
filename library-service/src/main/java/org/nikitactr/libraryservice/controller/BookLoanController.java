@@ -1,6 +1,6 @@
 package org.nikitactr.libraryservice.controller;
 
-import org.nikitactr.libraryservice.model.Book;
+import org.nikitactr.libraryservice.payload.reponse.BookResponse;
 import org.nikitactr.libraryservice.payload.request.BookLoanRequest;
 import org.nikitactr.libraryservice.service.LibraryService;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class BookLoanController {
     }
 
     @GetMapping
-    public List<Book> getAvailableBooks() {
+    public List<BookResponse> getAvailableBooks() {
         return libraryService.findAvailableBooks();
     }
 }
