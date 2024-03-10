@@ -19,6 +19,8 @@ Best practices that were not addressed in this project due to tight deadlines:
 
 * Not very strong application security, in a real project I would use off-the-shelf solutions like Keycloak.
 
+<a href="README.md#run">Going to how to run the section</a>
+
 ## Application flow diagram
 
 <img src="screenshots/APPLIFE.png" alt="Main Information" width="885" height="433">
@@ -181,7 +183,7 @@ Best practices that were not addressed in this project due to tight deadlines:
 ```
 
 
-### 🔨 Run the App
+### 🔨 <a id="run"> Run the App
 
 <b>Local</b>
 
