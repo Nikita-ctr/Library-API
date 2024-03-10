@@ -38,6 +38,32 @@ Best practices that were not addressed in this project due to tight deadlines:
 
 <a href="https://github.com/Nikita-ctr/springappconfig">Link</a>
 
+
+### Used Dependencies
+* Core
+    * Spring
+        * Spring Boot
+        * Spring Boot Test
+        * Spring Security
+        * Spring Web
+            * RestTemplate
+        * Spring Data
+            * Spring Data JPA
+        * Spring Cloud
+            * Spring Cloud Gateway Server
+            * Spring Cloud Config Server
+            * Spring Cloud Config Client
+    * Netflix
+        * Eureka Server
+        * Eureka Client
+* Database
+    * Mysql
+* Zipkin
+* Docker
+* Kubernetes
+* Log4j2
+
+
 ### Explore Rest APIs
 
 <table style="width:100%">
@@ -61,8 +87,14 @@ Best practices that were not addressed in this project due to tight deadlines:
   </tr>
     <tr>
       <td>GET</td>
-      <td>/library/loans</td>
+      <td>/library/loans/available</td>
       <td>Get all available books</td>
+      <td></td>
+  </tr>
+      <tr>
+      <td>GET</td>
+      <td>/library/loans/borrowed</td>
+      <td>Get all borrowed books</td>
       <td></td>
   </tr>
     <tr>
@@ -104,33 +136,6 @@ Best practices that were not addressed in this project due to tight deadlines:
 
 </table>
 
-
-
-### Used Dependencies
-* Core
-    * Spring
-        * Spring Boot
-        * Spring Boot Test
-        * Spring Security
-        * Spring Web
-            * RestTemplate
-        * Spring Data
-            * Spring Data JPA
-        * Spring Cloud
-            * Spring Cloud Gateway Server
-            * Spring Cloud Config Server
-            * Spring Cloud Config Client
-    * Netflix
-        * Eureka Server
-        * Eureka Client
-* Database
-    * Mysql
-* Zipkin
-* Docker
-* Kubernetes
-* Log4j2
-
-
 ## Valid Request Body (All requests must contain the Bearer token)
 
 ##### <a id="signup"> Signup for User
@@ -155,7 +160,7 @@ Best practices that were not addressed in this project due to tight deadlines:
     }
 ```
 
-##### <a id="createbook"> Add new book
+##### <a id="createbook"> Add new book 
 ```
     http://localhost:9090/books
     
@@ -166,6 +171,9 @@ Best practices that were not addressed in this project due to tight deadlines:
         "description" : "The author of "Red-Handed" depicts",
         "author" : "Peter Schweizer"
   }
+
+
+When you create a book, a request is sent to another service that automatically borrows that book
 
 ```
 
