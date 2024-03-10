@@ -252,7 +252,7 @@
         - docker tag library/bookservice:0.0.1 pomer2002/bookservice
         - docker push pomer2002/bookservice
         
-    6 ) orderservice
+    6 ) library-service
      
         - docker build -t library/libraryservice:0.0.1 .
         - docker tag library/libraryservice:0.0.1 pomer2002/libraryservice
