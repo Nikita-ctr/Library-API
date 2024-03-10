@@ -6,11 +6,13 @@ import org.nikitactr.libraryservice.mapper.BookMapper;
 import org.nikitactr.libraryservice.model.Book;
 import org.nikitactr.libraryservice.model.BookLoan;
 import org.nikitactr.libraryservice.payload.reponse.BookResponse;
+import org.nikitactr.libraryservice.payload.reponse.BorrowedBookResponse;
 import org.nikitactr.libraryservice.repository.BookLoanRepository;
 import org.nikitactr.libraryservice.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +55,29 @@ public class LibraryService {
                 .collect(Collectors.toList());
 
         return bookMapper.booksToBookResponses(availableBooks);
+    }
+
+    public List<BorrowedBookResponse> findNotAvailableBooks() {
+        List<Book> notAvailableBooks = bookRepository.findAll().stream()
+                .filter(book -> !isBookAvailable(book))
+                .collect(Collectors.toList());
+
+        List<BorrowedBookResponse> borrowedBookResponses = new ArrayList<>();
+
+        for (Book book : notAvailableBooks) {
+            BookLoan bookLoan = bookLoanRepository.findByBook(book);
+            BorrowedBookResponse borrowedBookResponse = BorrowedBookResponse.builder()
+                    .isbn(book.getIsbn())
+                    .title(book.getTitle())
+                    .genre(book.getGenre())
+                    .description(book.getDescription())
+                    .author(book.getAuthor())
+                    .loanTime(bookLoan.getLoanTime())
+                    .returnTime(bookLoan.getReturnTime())
+                    .build();
+            borrowedBookResponses.add(borrowedBookResponse);
+        }
+        return borrowedBookResponses;
     }
 
     private boolean isBookAvailable(Book book) {
