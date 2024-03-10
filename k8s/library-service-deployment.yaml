@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: library-service-app
+spec:
+  selector:
+    matchLabels:
+      app: library-service-app
+  template:
+    metadata:
+      labels:
+        app: library-service-app
+    spec:
+      containers:
+        - name: library-service-app
+          image: pomer2002/libraryservice
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
+
+          env:
+            - name: CONFIG_SERVER_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: config-cm
+                  key: config_url
+            - name: EUREKA_SERVER_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: eureka-cm
+                  key: eureka_service_address
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-cm
+                  key: hostname
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: library-service-svc
+spec:
+  selector:
+    app: library-service-app
+  ports:
+    - port: 80
+      targetPort: 8082
