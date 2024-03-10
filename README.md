@@ -265,4 +265,48 @@
     docker-compose up -d
 ```
 
+<b>Kubernetes</b>
+
+<b>1 )</b> Install <b>minikube</b> to access this link https://minikube.sigs.k8s.io/docs/start/
+
+<b>2 )</b> Open <b>command prompt</b> and install <b>kubectl</b> through this command shown below 
+```
+    minikube kubectl --
+```
+
+<b>3 )</b> Start <b>minikube</b> through this command shown below.
+```
+    minikube start
+```
+
+<b>4 )</b> Open <b>minikube dashboard</b> through this command shown below.
+```
+    minikube dashboard
+```
+
+<b>5 )</b> Run all <b>images</b> coming from Docker hub on Kubernetes through this command shown below.
+```
+    kubectl apply -f k8s
+```
+
+<b>6 )</b> Show all information about images running on <b>Kubernetes</b> through this command
+```
+    kubectl get all
+```
+
+<b>7 )</b> Show all <b>services</b> running on Kubernetes through this command
+```
+    kubectl get services
+```
+
+<b>8 )</b> Show <b>eureka server</b> on Kubernetes through this command
+```
+    minikube service eureka-lb
+```
+
+<b>9 )</b> Show <b>api gateway</b> on Kubernetes through this command
+```
+    minikube service cloud-gateway-svc
+```
+<b>10 )</b> Copy <b>IP address</b> and Replace <b>it</b> with <b>localhost</b> of the <b>endpoints</b>
 
