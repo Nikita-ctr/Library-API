@@ -1,5 +1,26 @@
 # Test task - Library API
 
+Before completing the test, I gave it an estimate of 20 hours to complete, so I had to stick to that time.
+
+* Basic Web API functionality - 4 hours
+* Additional Web API Functionality - 6 hours
+* Basic Application Configuration + Container and Service Configuration - 4 hours
+* Testing of basic functionality - 1 hour
+* Basic documentation + SwaggerOpenAPI - 3 hours
+* Project description and startup process - 2 hours
+
+Best practices that were not addressed in this project due to tight deadlines:
+
+* No database migration, instead autogeneration of JPA tables.
+
+* Weak application testing, both unit and integration tests should be written for services and controllers. In addition, the condition did not describe test coverage
+
+* Service level logging, logs should be in distributed format, e.g. Spring Cloud Sleuth could be used.
+
+* Not very strong application security, in a real project I would use off-the-shelf solutions like Keycloak.
+
+## Application flow diagram
+
 <img src="screenshots/APPLIFE.png" alt="Main Information" width="885" height="433">
 
 6 services whose name are shown below have been devised within the scope of this project.
