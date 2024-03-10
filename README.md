@@ -305,3 +305,50 @@
 ```
 <b>10 )</b> Copy <b>IP address</b> and Replace <b>it</b> with <b>localhost</b> of the <b>endpoints</b>
 
+### The default setting here is to autogenerate tables at application startup
+if you want to create tables manually (which is more correct), manually create 2 databases:
+
+userdb and execute the script for it:
+```
+CREATE TABLE roles (
+    id   INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NULL
+);
+
+CREATE TABLE users (
+    id       INT AUTO_INCREMENT PRIMARY KEY,
+    email    VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NULL,
+    username VARCHAR(255) NOT NULL,
+    CONSTRAINT UK_users_email UNIQUE (email),
+    CONSTRAINT UK_users_username UNIQUE (username)
+);
+
+CREATE TABLE user_roles (
+    user_id INT NOT NULL,
+    role_id INT NOT NULL,
+    PRIMARY KEY (user_id, role_id),
+    CONSTRAINT FK_user_roles_roles FOREIGN KEY (role_id) REFERENCES roles (id),
+    CONSTRAINT FK_user_roles_users FOREIGN KEY (user_id) REFERENCES users (id)
+);
+```
+
+And second one, bookdb:
+```
+CREATE TABLE book (
+    id          BIGINT AUTO_INCREMENT PRIMARY KEY,
+    author      VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    genre       VARCHAR(255) NOT NULL,
+    isbn        VARCHAR(255) NOT NULL,
+    title       VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE book_loans (
+    id          BIGINT AUTO_INCREMENT PRIMARY KEY,
+    loan_time   DATETIME(6) NOT NULL,
+    return_time DATETIME(6) NOT NULL,
+    book_id     BIGINT NOT NULL,
+    CONSTRAINT FK_book_loans_book FOREIGN KEY (book_id) REFERENCES book (id)
+);
+```
