@@ -1,5 +1,8 @@
 6 services whose name are shown below have been devised within the scope of this project.
 
+<img src="screenshots/APPLIFE.png" alt="Main Information" width="985" height="533">
+
+
 - Authentication Service
 - Book Service
 - Library Service
