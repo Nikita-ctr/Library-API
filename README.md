@@ -183,9 +183,7 @@
 <b>7 )</b> Run other services (<b>authentication-service</b>, <b>library-service</b>, <b>book-service</b>)
 
 
-<b>Docker</b>
-
-<b>1 )</b> Install <b>Docker Desktop</b>. Here is the installation <b>link</b> : https://docs.docker.com/docker-for-windows/install/
+<b>Docker build</b>
 
 <b>2 )</b> Build <b>jar</b> file for all services shown below
 
@@ -266,8 +264,6 @@
 ```
 
 <b>Kubernetes</b>
-
-<b>1 )</b> Install <b>minikube</b> to access this link https://minikube.sigs.k8s.io/docs/start/
 
 <b>2 )</b> Open <b>command prompt</b> and install <b>kubectl</b> through this command shown below 
 ```
