@@ -1,9 +1,8 @@
 # Test task - Library API
 
-6 services whose name are shown below have been devised within the scope of this project.
-
 <img src="screenshots/APPLIFE.png" alt="Main Information" width="885" height="433">
 
+6 services whose name are shown below have been devised within the scope of this project.
 
 - Authentication Service
 - Book Service
