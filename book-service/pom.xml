@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>book-service</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -178,6 +179,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>book-service</finalName>
     </build>
 
 
