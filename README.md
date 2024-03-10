@@ -104,7 +104,7 @@
 * Log4j2
 
 
-## Valid Request Body
+## Valid Request Body (All requests must contain the Bearer token)
 
 ##### <a id="signup"> Signup for User
 ```
@@ -139,6 +139,7 @@
         "description" : "The author of "Red-Handed" depicts",
         "author" : "Peter Schweizer"
   }
+
 ```
 
 ##### <a id="updatebook"> Update book info
@@ -153,3 +154,26 @@
         "author" : "Peter Schweizer"
   }
 ```
+
+
+### 🔨 Run the App
+
+<b>Local</b>
+
+<b>1 )</b> Download your project from this link `https://github.com/Nikita-ctr/Library-API.git`
+
+<b>2 )</b> Go to the project's home directory :  `cd library-api-gateway`
+
+<b>3 )</b> Run <b>Service Registry (Eureka Server)</b>
+
+<b>4 )</b> Run <b>config server</b>
+
+<b>5 )</b> Run <b>zipkin</b> through these command shown below on <b>Docker</b>
+```
+    docker run -d -p 9411:9411 openzipkin/zipkin
+```
+
+<b>6 )</b> Run <b>Gateway service</b>
+
+<b>7 )</b> Run other services (<b>authentication-service</b>, <b>library-service</b>, <b>book-service</b>)
+
