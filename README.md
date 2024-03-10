@@ -236,7 +236,7 @@
     
     3 ) api-gateway
      
-        - docker build -t library/configserver:0.0.1 .
+        - docker build -t library/apigateway:0.0.1 .
         - docker tag library/apigateway:0.0.1 pomer2002/apigateway
         - docker push pomer2002/apigateway
     
