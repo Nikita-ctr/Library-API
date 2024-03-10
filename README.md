@@ -1,13 +1,13 @@
 # Test task - Library API
 
-Before completing the test, I gave it an estimate of 20 hours to complete, so I had to stick to that time.
+Before starting the test, I gave it an estimate of 20 hours to complete, so I had to stick to that time.
 
 * Basic Web API functionality - 4 hours
 * Additional Web API Functionality - 6 hours
-* Basic Application Configuration + Container and Service Configuration - 4 hours
+* Application Configuration: Docker, Kubernetes - 4 hours
 * Testing of basic functionality - 1 hour
 * Basic documentation + SwaggerOpenAPI - 3 hours
-* Project description and startup process - 2 hours
+* Writing logic to protect the application - 2 hours
 
 Best practices that were not addressed in this project due to tight deadlines:
 
