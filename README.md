@@ -180,3 +180,87 @@
 
 <b>7 )</b> Run other services (<b>authentication-service</b>, <b>library-service</b>, <b>book-service</b>)
 
+
+<b>Docker</b>
+
+<b>1 )</b> Install <b>Docker Desktop</b>. Here is the installation <b>link</b> : https://docs.docker.com/docker-for-windows/install/
+
+<b>2 )</b> Build <b>jar</b> file for all services shown below
+
+<table style="width:100%">
+  <tr>
+    <th>Service</th>
+    <th>Command</th>
+  </tr>
+  <tr>
+    <td>service-registry</td>
+    <td>mvn clean install</td>
+  </tr>
+  <tr>
+    <td>configserver</td>
+    <td>mvn clean install</td>
+  </tr>
+  <tr>
+    <td>apigateway</td>
+    <td>mvn clean install -DskipTests</td>
+  </tr>
+  <tr>
+    <td>auth-service</td>
+    <td>mvn clean install -DskipTests</td>
+  </tr>
+  <tr>
+    <td>libraryservice</td>
+    <td>mvn clean install -DskipTests</td>
+  </tr>
+  <tr>
+    <td>bookservice</td>
+    <td>mvn clean install -DskipTests</td>
+  </tr>
+</table>
+
+<b>3 )</b> Build all <b>images</b> and push to <b>Docker Hub</b>
+```
+    1 ) service-registry
+     
+        - docker build -t library/serviceregistry:0.0.1 .
+        - docker tag library/serviceregistry:0.0.1 pomer2002/serviceregistry
+        - docker push pomer2002/serviceregistry
+        
+    2 ) configserver
+     
+        - docker build -t library/configserver:0.0.1 .
+        - docker tag library/configserver:0.0.1 pomer2002/configserver
+        - docker push pomer2002/configserver
+    
+    3 ) api-gateway
+     
+        - docker build -t library/configserver:0.0.1 .
+        - docker tag library/apigateway:0.0.1 pomer2002/apigateway
+        - docker push pomer2002/apigateway
+    
+    4 ) auth-service
+     
+        - docker build -t library/authservice:0.0.1 .
+        - docker tag library/authservice:0.0.1 pomer2002/authservice
+        - docker push pomer2002/authservice
+        
+    5 ) book-service
+     
+        - docker build -t library/bookservice:0.0.1 .
+        - docker tag library/bookservice:0.0.1 pomer2002/bookservice
+        - docker push pomer2002/bookservice
+        
+    6 ) orderservice
+     
+        - docker build -t library/libraryservice:0.0.1 .
+        - docker tag library/libraryservice:0.0.1 pomer2002/libraryservice
+        - docker push pomer2002/libraryservice
+        
+```
+
+<b>4 )</b> Run all <b>Containers</b> through this command shown below under main folder
+```
+    docker-compose up -d
+```
+
+
