@@ -2,7 +2,7 @@
 
 6 services whose name are shown below have been devised within the scope of this project.
 
-<img src="screenshots/APPLIFE.png" alt="Main Information" width="985" height="533">
+<img src="screenshots/APPLIFE.png" alt="Main Information" width="885" height="433">
 
 
 - Authentication Service
