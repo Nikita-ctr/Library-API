@@ -212,6 +212,7 @@ When you create a book, a request is sent to another service that automatically 
 
 <b>7 )</b> Run other services (<b>authentication-service</b>, <b>library-service</b>, <b>book-service</b>)
 
+Before running, you can add test data for clarity to the bookdb database, which is located in book-service/src/main/resources/db/migration
 
 <b>Docker build</b>
 
