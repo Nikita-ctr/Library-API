@@ -136,7 +136,7 @@ Best practices that were not addressed in this project due to tight deadlines:
 
 </table>
 
-## Valid Request Body (All requests must contain the Bearer token)
+## Valid Request Body (All requests must contain the Bearer token except signup and login)
 
 ##### <a id="signup"> Signup for User
 ```
