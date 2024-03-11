@@ -123,20 +123,20 @@ Best practices that were not addressed in this project due to tight deadlines:
   </tr>
   <tr>
       <td>PUT</td>
-      <td>/books/{book_id}</td>
-      <td>Update book by id</td>
+      <td>/books/{book_isbn}</td>
+      <td>Update book by book_isbn</td>
       <td><a href="README.md#updatebook">Info</a></td>
   </tr>
   <tr>
       <td>DELETE</td>
-      <td>/books/{book_id}</td>
-      <td>Delete book by id</td>
+      <td>/books/{book_isbn}</td>
+      <td>Delete book by isbn</td>
       <td></td>
   </tr>
 
 </table>
 
-## Valid Request Body (All requests must contain the Bearer token)
+## Valid Request Body (All requests must contain the Bearer token except signup and login)
 
 ##### <a id="signup"> Signup for User
 ```
@@ -179,7 +179,7 @@ When you create a book, a request is sent to another service that automatically 
 
 ##### <a id="updatebook"> Update book info
 ```
-    http://localhost:9090/books/{book_id}
+    http://localhost:9090/books/{book_isbn}
     
   {
         "isbn" : "41334sdf123",
