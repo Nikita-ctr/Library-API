@@ -64,7 +64,9 @@ Best practices that were not addressed in this project due to tight deadlines:
 * Log4j2
 
 
-### Explore Rest APIs
+### Explore Rest APIs 
+
+#### You can test a ready-made collection of endpoints in the postman_collection folder
 
 <table style="width:100%">
   <tr>
