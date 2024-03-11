@@ -173,7 +173,7 @@ Best practices that were not addressed in this project due to tight deadlines:
   }
 
 
-When you create a book, a request is sent to another service that automatically borrows that book
+When you create a book, a request is sent to another service that automatically borrows that book for 4 hour
 
 ```
 
