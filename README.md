@@ -13,7 +13,7 @@ Best practices that were not addressed in this project due to tight deadlines:
 
 * No database migration, instead autogeneration of JPA tables.
 
-* Weak application testing, both unit and integration tests should be written for services and controllers. In addition, the task decription did not describe test coverage
+* Weak application testing, both unit and integration tests should be written for services and controllers. In addition, the task decription did not describe test coverage. And you should store your application secrets in vault storage for example
 
 * Service level logging, logs should be in distributed format, e.g. Spring Cloud Sleuth could be used.
 
