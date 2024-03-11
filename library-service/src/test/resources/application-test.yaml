@@ -9,7 +9,7 @@ spring:
     hibernate:
       ddl-auto: update
   application:
-    name: BOOK-SERVICE
+    name: LIBRARY-SERVICE
   config:
     import: optional:configserver:http://localhost:9296
 
