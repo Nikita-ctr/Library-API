@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "2461c2c1-f87a-4508-b69d-5c8681179102",
+		"name": "Library API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16519524",
+		"_collection_link": "https://cloudy-robot-20400.postman.co/workspace/Robotics~d3cb3236-4f23-42a4-8542-e602e39a9e5b/collection/16519524-2461c2c1-f87a-4508-b69d-5c8681179102?action=share&source=collection_link&creator=16519524"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"username\" : \"Nik\",\r\n        \"password\" : \"sdfgtb123\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/authenticate/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"authenticate",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"username\" : \"Nik\",\r\n        \"password\" : \"sdfgtb123\",\r\n        \"email\" : \"xmil.rest@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/authenticate/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"authenticate",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all books",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJOaWsiLCJpc3MiOiJST0xFX1VTRVIgIiwiaWF0IjoxNzEwMTE3MTU1LCJleHAiOjE3MTAxMTcyNzV9.hLGLVbHhBgB_Enxiqk0zEjBn2eTd34WdfPbqUC-yFv2Nh-Px2vUdeLvXfonBcI4KfGdKYiYfRNDlVLLQGWuIKw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get book by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJOaWsiLCJpc3MiOiJST0xFX1VTRVIgIiwiaWF0IjoxNzEwMTE3NjgwLCJleHAiOjE3MTAxMTc4MDB9.H_ngCkfh1SGcZmMqqXTUVSo3r4bu-LYPrliAdZwWf5RMbGnZYzex1WQPiptmFK49AEKU-2J6qSL-CrAXuF9Vvw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/books/32",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"books",
+						"32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get book by isbn",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJOaWsiLCJpc3MiOiJST0xFX1VTRVIgIiwiaWF0IjoxNzEwMTE3NTU1LCJleHAiOjE3MTAxMTc2NzV9.OoznWaDNZSfsBtylSOIYAnMa4BlrBSGDkug6SgiZQapSAY25WD8C3r45W5mkoVkdqRGzcAnqt49Vw3CTYrrK8Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/books/isbn/41334sdf123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"books",
+						"isbn",
+						"41334sdf123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJOaWsiLCJpc3MiOiJST0xFX1VTRVIgIiwiaWF0IjoxNzEwMTE3NjgwLCJleHAiOjE3MTAxMTc4MDB9.H_ngCkfh1SGcZmMqqXTUVSo3r4bu-LYPrliAdZwWf5RMbGnZYzex1WQPiptmFK49AEKU-2J6qSL-CrAXuF9Vvw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"isbn\" : \"1231\",\r\n        \"title\" : \"BLOOD MONEY 2\",\r\n        \"genre\" : \"thriller\",\r\n        \"description\" : \"The author of Red-Handed depicts\",\r\n        \"author\" : \"Peter Schweizer\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update book by isbn",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJOaWsiLCJpc3MiOiJST0xFX1VTRVIgIiwiaWF0IjoxNzEwMTE3MTU1LCJleHAiOjE3MTAxMTcyNzV9.hLGLVbHhBgB_Enxiqk0zEjBn2eTd34WdfPbqUC-yFv2Nh-Px2vUdeLvXfonBcI4KfGdKYiYfRNDlVLLQGWuIKw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"isbn\" : \"11111\",\r\n        \"title\" : \"BLOOD MONEY 3\",\r\n        \"genre\" : \"thriller\",\r\n        \"description\" : \"The author of Red-Handed depicts\",\r\n        \"author\" : \"Peter Schweizer\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/books/12312",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"books",
+						"12312"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete book by isbn",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJOaWsiLCJpc3MiOiJST0xFX1VTRVIgIiwiaWF0IjoxNzEwMTE3NjgwLCJleHAiOjE3MTAxMTc4MDB9.H_ngCkfh1SGcZmMqqXTUVSo3r4bu-LYPrliAdZwWf5RMbGnZYzex1WQPiptmFK49AEKU-2J6qSL-CrAXuF9Vvw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/books/1234567890",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"books",
+						"1234567890"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Available books",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJOaWsiLCJpc3MiOiJST0xFX1VTRVIgIiwiaWF0IjoxNzEwMTE3NjgwLCJleHAiOjE3MTAxMTc4MDB9.H_ngCkfh1SGcZmMqqXTUVSo3r4bu-LYPrliAdZwWf5RMbGnZYzex1WQPiptmFK49AEKU-2J6qSL-CrAXuF9Vvw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/library/loans/available",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"library",
+						"loans",
+						"available"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrowed books",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJOaWsiLCJpc3MiOiJST0xFX1VTRVIgIiwiaWF0IjoxNzEwMTE3NjgwLCJleHAiOjE3MTAxMTc4MDB9.H_ngCkfh1SGcZmMqqXTUVSo3r4bu-LYPrliAdZwWf5RMbGnZYzex1WQPiptmFK49AEKU-2J6qSL-CrAXuF9Vvw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/library/loans/borrowed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"library",
+						"loans",
+						"borrowed"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
