@@ -73,7 +73,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJVc2VyIiwiaXNzIjoiUk9MRV9VU0VSICIsImlhdCI6MTcwOTk0NTA3MSwiZXhwIjoxNzA5OTQ1MTkxfQ.6SDHbeUtq7mnLRdQUxqclul3_B6UTLVKpvLlF6Oqj2PLD_ue4L3jyKuEHDUxVWVP7q_PXFZgWbK1FUx0u6p-iw",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJOaWsiLCJpc3MiOiJST0xFX1VTRVIgIiwiaWF0IjoxNzEwMTE3MTU1LCJleHAiOjE3MTAxMTcyNzV9.hLGLVbHhBgB_Enxiqk0zEjBn2eTd34WdfPbqUC-yFv2Nh-Px2vUdeLvXfonBcI4KfGdKYiYfRNDlVLLQGWuIKw",
 							"type": "string"
 						}
 					]
@@ -81,12 +81,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/books",
+					"raw": "http://localhost:9090/books",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "9090",
 					"path": [
 						"books"
 					]
@@ -184,7 +184,7 @@
 			"response": []
 		},
 		{
-			"name": "Update book by id",
+			"name": "Update book by isbn",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -213,7 +213,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete book by id",
+			"name": "Delete book by isbn",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -257,6 +257,37 @@
 					"path": [
 						"library",
 						"loans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrowed books",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJEaW1hIiwiaXNzIjoiUk9MRV9VU0VSICIsImlhdCI6MTcxMDExMjcxMywiZXhwIjoxNzEwMTEyODMzfQ.nhoEFYbCC5RqeM5pKQeP4jisyMJRgfbZFX6Sn6aYhwq2QXmuT__mAMxMFnlm3gSaHL1JeiAfsHRa8i99CkXkrw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/library/loans/borrowed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"library",
+						"loans",
+						"borrowed"
 					]
 				}
 			},

@@ -43,14 +43,14 @@ public class BookController {
     }
 
     @Operation(summary = "Update an existing book")
-    @PutMapping("/{id}")
-    public void updateBook(@PathVariable Long id, @RequestBody BookRequest bookRequest) {
-        bookService.updateBook(id, bookRequest);
+    @PutMapping("/{isbn}")
+    public void updateBook(@PathVariable String isbn, @RequestBody BookRequest bookRequest) {
+        bookService.updateBook(isbn, bookRequest);
     }
 
-    @Operation(summary = "Delete a book by ID")
-    @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable Long id) {
-        bookService.deleteBook(id);
+    @Operation(summary = "Delete a book by isbn")
+    @DeleteMapping("/{isbn}")
+    public void deleteBook(@PathVariable String isbn) {
+        bookService.deleteBook(isbn);
     }
 }

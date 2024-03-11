@@ -75,10 +75,10 @@ public class BookService {
         sendBookLoanRequest(book.getId(), bearerToken);
     }
 
-    public void updateBook(Long id, BookRequest bookRequest) {
-        Book book = bookRepository.findById(id)
+    public void updateBook(String isbn, BookRequest bookRequest) {
+        Book book = bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> {
-                    String message = "Book with id: " + id + " not found";
+                    String message = "Book with isbn: " + isbn + " not found";
                     log.error(message);
                     return new BookNotFoundException(message);
                 });
@@ -88,22 +88,22 @@ public class BookService {
         book.setDescription(bookRequest.getDescription());
         book.setAuthor(bookRequest.getAuthor());
         bookRepository.save(book);
-        log.info("Updated book with id: {}", id);
+        log.info("Updated book with id: {}", isbn);
     }
 
 
     @Transactional
-    public void deleteBook(Long id) {
-        Book book = bookRepository.findById(id)
+    public void deleteBook(String isbn) {
+        Book book = bookRepository.findByIsbn(isbn)
                 .orElseThrow(() -> {
-                    String message = "Book with id: " + id + " not found";
+                    String message = "Book with isbn: " + isbn + " not found";
                     log.error(message);
                     return new BookNotFoundException(message);
                 });
 
         bookRepository.deleteBookAndLoans(book.getId());
         bookRepository.delete(book);
-        log.info("Deleted book with id: {}", id);
+        log.info("Deleted book with id: {}", isbn);
     }
 
     private void sendBookLoanRequest(Long bookId, String bearerToken) {

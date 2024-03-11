@@ -15,5 +15,6 @@ spring:
     name: BOOK-SERVICE
   config:
     import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:9296}
+
 jwt:
   secret: mySecretKey
