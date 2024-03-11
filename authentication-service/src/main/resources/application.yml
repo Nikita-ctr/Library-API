@@ -18,4 +18,4 @@ spring:
 
 jwt:
   secret: mySecretKey
-  expireMs: 120000
+  expireMs: 1200000
