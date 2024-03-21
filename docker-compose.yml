@@ -69,7 +69,7 @@ services:
       - backend
 
 
-  productservice:
+  bookservice:
     image: 'pomer2002/bookservice:latest'
     container_name: book-service
     ports:
@@ -91,7 +91,7 @@ services:
     networks:
       - backend
 
-  orderservice:
+  libraryservice:
     image: 'pomer2002/libraryservice:latest'
     container_name: library-service
     ports:
@@ -121,7 +121,6 @@ services:
       - "3306:3306"
     restart: always
     environment:
-      #MYSQL_USER: root
       MYSQL_PASSWORD: sdfgtb123
       MYSQL_ROOT_PASSWORD: sdfgtb123
     volumes:
