@@ -1,6 +1,6 @@
 # Test task - Library API
 
-Before starting the test, I gave it an estimate of 20 hours to complete, so I had to stick to that time.
+Before starting the test, I gave it an estimate of 20 hours to complete, so I had to stick to that time
 
 * Basic Web API functionality - 4 hours
 * Additional Web API Functionality - 6 hours
